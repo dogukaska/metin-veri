@@ -1,7 +1,8 @@
 const $=id=>document.getElementById(id);
-let result = "";
+let result = "", revision = 0;
 const lines = text => text.replace(/\r\n?/g,"\n").split("\n");
 function clear() {
+  revision++;
   result = "";
   $("diff").hidden = $("output-label").hidden = true;
   $("copy").disabled = $("download").disabled = true;
@@ -17,10 +18,16 @@ for (const id of ["first","second"]) $(id).addEventListener("input",clear);
 $("file").addEventListener("change",async () => {
   const file=$("file").files[0];
   if (!file) return;
+  $("file").value="";
+  clear();
+  const request = revision;
   if(file.size>5*1024*1024) { $("status").textContent="5 MiB’tan küçük bir CSV seç.";return; }
-  try { $("first").value=await file.text();clear(); }
-  catch { $("status").textContent="CSV okunamadı."; }
-  finally { $("file").value=""; }
+  try {
+    const text = await file.text();
+    if (request === revision) { $("first").value = text; clear(); }
+  } catch {
+    if (request === revision) $("status").textContent="CSV okunamadı.";
+  }
 });
 function compare(a,b) {
   if(a.length>4000||b.length>4000||a.length*b.length>4_000_000) throw Error("Karşılaştırma için daha kısa metinler seç.");
