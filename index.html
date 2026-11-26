@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Metin ve Veri · Dijital Çakı</title>
+<meta name="theme-color" content="#efede8">
+<link rel="icon" href="/icons/dijital-caki.svg">
+<link rel="stylesheet" href="/tool.css?v=20261126b">
+<script src="/theme.js?v=20261126c"></script>
+<script src="vendor/papaparse.min.js?v=5.5.3" defer></script>
+<script type="module" src="app.js"></script>
+</head>
+<body><main class="tool">
+<header><a class="back" href="/">Dijital Çakı</a>
+<h1>Metin ve Veri</h1><p class="intro">Metinleri karşılaştır, yinelenen satırları temizle ve CSV kayıtlarını düzenle.</p></header>
+<section class="panel">
+<label for="mode">İşlem</label><select id="mode"><option value="diff">İki metni karşılaştır</option><option value="lines">Yinelenen satırları kaldır</option><option value="csv">Yinelenen CSV kayıtlarını kaldır</option></select>
+<div class="dual"><label>İlk metin<textarea id="first" rows="10"></textarea></label>
+<label id="second-label">İkinci metin<textarea id="second" rows="10"></textarea></label></div>
+<label id="csv-label" hidden>CSV dosyası seç<input id="file" type="file" accept=".csv,text/csv"></label>
+<div class="row"><button id="run" class="primary">İşle</button><button id="copy" disabled>Kopyala</button><button id="download" disabled>İndir</button></div>
+<p id="status" role="status"></p><pre id="diff" hidden aria-label="Metin farkları"></pre>
+<label id="output-label" hidden>Sonuç<textarea id="output" rows="10" readonly></textarea></label>
+</section>
+</main></body></html>
