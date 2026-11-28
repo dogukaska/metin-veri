@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#efede8">
+<title>CSV ↔ Excel · Dijital Çakı</title>
+<link rel="icon" href="/icons/dijital-caki.svg">
+<link rel="stylesheet" href="/tool.css?v=20261126d">
+<link rel="stylesheet" href="/gunluk/style.css?v=1">
+<link rel="stylesheet" href="./excel.css?v=1">
+<script src="/theme.js?v=20261126c"></script>
+<script type="module" src="./app.js?v=1"></script>
+</head>
+<body>
+<main class="tool daily spreadsheet">
+  <header>
+    <a class="back" href="../">Metin ve Veri</a>
+    <h1>CSV ↔ Excel</h1>
+    <p class="intro">CSV ve XLSX dosyalarını tarayıcında dönüştür.</p>
+  </header>
+  <section class="panel" aria-label="Dönüştürme">
+    <div class="spreadsheet-fields">
+      <label for="direction">Dönüştürme yönü
+        <select id="direction">
+          <option value="csv-to-xlsx">CSV → Excel</option>
+          <option value="xlsx-to-csv">Excel → CSV</option>
+        </select>
+      </label>
+      <label for="delimiter"><span id="delimiter-label">CSV ayıracı</span><select id="delimiter"></select></label>
+    </div>
+    <label for="source-file" id="file-label">CSV dosyası seç</label>
+    <input id="source-file" type="file" accept=".csv,.tsv,text/csv,text/tab-separated-values">
+    <label for="sheet" id="sheet-field" hidden>Excel sayfası<select id="sheet"></select></label>
+    <p class="muted" id="format-note">CSV hücreleri metin olarak aktarılır. Barkod ve kodlardaki baştaki sıfırlar korunur.</p>
+    <p class="muted" id="file-limit">En fazla 10 MiB dosya seç.</p>
+    <div class="row"><button id="download" type="button" class="primary" disabled>Excel indir</button></div>
+    <p id="status" role="status"></p>
+  </section>
+  <section id="preview-section" class="panel" aria-labelledby="preview-heading" hidden>
+    <h2 id="preview-heading">Önizleme</h2>
+    <p class="muted" id="preview-summary"></p>
+    <div class="preview-scroll" tabindex="0" role="region" aria-label="Tablo önizlemesi">
+      <table id="preview" aria-describedby="preview-summary"><tbody></tbody></table>
+    </div>
+  </section>
+</main>
+</body>
+</html>
